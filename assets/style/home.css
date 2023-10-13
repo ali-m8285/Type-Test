@@ -14,13 +14,19 @@ body {
     font-family: monospace;
 }
 
+.quote {
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+
+}
+
 .quoteContainer {
     width: 800px;
     min-height: 400px;
     border: 2px solid black;
     font-size: 30px;
     padding: 2rem;
-    position: relative;
 }
 
 span {
@@ -40,6 +46,8 @@ span {
 }
 
 .author, .category {
+    font-size: 30px;
+    padding: 0;
     position: absolute;
     top: calc(100% + 20px);
 }

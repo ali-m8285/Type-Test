@@ -11,7 +11,6 @@ async function getQuote() {
     });
 
     const data = await response.json();
-    console.log(data);
     quote = data[0].quote;
     author = data[0].author;
     category = data[0].category;
@@ -22,6 +21,11 @@ getQuote().then(() => {
     const modal = document.querySelector(".endModal");
     const btnCloseModal = document.querySelector(".closeModal");
     const overlay = document.querySelector(".overlay");
+    const wordCount = quote.split(" ").length;
+    const quoteWritePlace = document.getElementById("writePlace");
+    const authorElement = document.querySelector(".author");
+    const categoryElement = document.querySelector(".category");
+    let wpm;
     let correctLetterCounter = 0;
     let falseLetterCounter = 0;
 
@@ -29,17 +33,18 @@ getQuote().then(() => {
         quoteContainer.innerHTML += `<span id="letter${letter}">${quote[letter]}<span>`;
     }
 
-    const quoteWritePlace = document.getElementById("writePlace");
-    const authorElement = document.querySelector(".author");
-    const categoryElement = document.querySelector(".category");
 
+    quoteWritePlace.value = "";
     authorElement.textContent += author;
     categoryElement.textContent += category;
+    document.getElementById("letter0").classList.add("focus");
 
     quoteWritePlace.addEventListener("focus", () => {
         document
             .getElementById(`letter${quoteWritePlace.value.length}`)
             .classList.add("focus");
+
+            setInterval(() => {console.log(true); console.log();}, 1000)
     });
 
     quoteWritePlace.addEventListener("focusout", () => {
