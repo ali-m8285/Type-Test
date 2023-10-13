@@ -1,0 +1,121 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+}
+
+.quoteContainer {
+    width: 800px;
+    min-height: 400px;
+    border: 2px solid black;
+    font-size: 30px;
+    padding: 2rem;
+    position: relative;
+}
+
+span {
+    padding: 0 1px;
+}
+
+#writePlace {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    color: transparent;
+}
+
+.author, .category {
+    position: absolute;
+    top: calc(100% + 20px);
+}
+
+.author {
+    left: 0;
+}
+
+.category {
+    right: 10px;
+    text-transform: capitalize;
+}
+
+@keyframes blink {
+    0% {
+        background-color: yellow;
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+.focus {
+    background-color: yellow;
+    animation: blink 0.5s infinite alternate ease;
+}
+
+.correct {
+    background-color: rgb(64, 209, 64);
+}
+
+.false {
+    background-color: red;
+}
+
+.endModal {
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: 0 0 20px 3px white;
+    text-shadow: 0 0 20px black;
+    font-size: 30px;
+    color: white;
+    background-color: red;
+    z-index: 99;
+}
+
+.closeModal {
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.closeModal:hover {
+    transform: scale(1.2);
+}
+
+.closeModal:active {
+    transform: scale(0.9);
+    transition: .1s;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    display: none;
+}
