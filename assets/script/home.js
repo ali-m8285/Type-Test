@@ -35,7 +35,7 @@ getQuote().then(() => {
     const wordCountElement = document.querySelector(".wordCount");
     const timeElement = document.querySelector(".time")
     const wordCount = quote.split(" ").length;
-    let timer, time = 0 ;
+    let timer = false, time = 0 ;
     let wpm;
     let correctLetterCounter = 0;
     let falseLetterCounter = 0;
@@ -60,6 +60,7 @@ getQuote().then(() => {
 
     quoteWritePlace.addEventListener("focusout", () => {
         clearInterval(timer)
+        timer = false;
         
         document
             .getElementById(`letter${quoteWritePlace.value.length}`)
@@ -68,10 +69,12 @@ getQuote().then(() => {
 
     quoteWritePlace.addEventListener("keypress", e => {
         // ***************************************************************************** KH.darman inja :)
-        timer = setInterval(() => {
-            time++;
-            console.log(time);
-        }, 1000)
+        if (!timer) {
+            timer = setInterval(() => {
+                time++;
+                console.log(time);
+            }, 1000)
+        }
         // ************************************************************************************************
         
         const letterElement = document.getElementById(
