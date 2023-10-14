@@ -3,28 +3,39 @@ const api_key = "fMLExSSadUeokrb2mFrq0Q==QZcXR8OWU37Lvp7n";
 let quote, author, category;
 
 async function getQuote() {
-    const response = await fetch(api_url, {
-        method: "GET",
-        headers: {
-            "X-Api-Key": api_key,
-        },
-    });
+    document.querySelector("body").style.cursor = "wait";
 
-    const data = await response.json();
-    quote = data[0].quote;
-    author = data[0].author;
-    category = data[0].category;
+    // const response = await fetch(api_url, {
+    //     method: "GET",
+    //     headers: {
+    //         "X-Api-Key": api_key,
+    //     },
+    // });
+
+    // const data = await response.json();
+    // quote = data[0].quote;
+    // author = data[0].author;
+    // category = data[0].category;
+
+    quote = "hello world";
+    author = "ali majidi";
+    category = "fucked up";
 }
 
 getQuote().then(() => {
     const quoteContainer = document.querySelector(".quoteContainer");
-    const modal = document.querySelector(".endModal");
-    const btnCloseModal = document.querySelector(".closeModal");
-    const overlay = document.querySelector(".overlay");
-    const wordCount = quote.split(" ").length;
     const quoteWritePlace = document.getElementById("writePlace");
     const authorElement = document.querySelector(".author");
     const categoryElement = document.querySelector(".category");
+    const modal = document.querySelector(".endModal");
+    const btnCloseModal = document.querySelector(".closeModal");
+    const overlay = document.querySelector(".overlay");
+    const correctLetterElement = document.querySelector(".correctLetters");
+    const falseLetterElement = document.querySelector(".falseLetters");
+    const wordCountElement = document.querySelector(".wordCount");
+    const timeElement = document.querySelector(".time")
+    const wordCount = quote.split(" ").length;
+    let timer, time = 0 ;
     let wpm;
     let correctLetterCounter = 0;
     let falseLetterCounter = 0;
@@ -33,27 +44,36 @@ getQuote().then(() => {
         quoteContainer.innerHTML += `<span id="letter${letter}">${quote[letter]}<span>`;
     }
 
-
+    document.querySelector("body").style.cursor = "default";
     quoteWritePlace.value = "";
     authorElement.textContent += author;
     categoryElement.textContent += category;
     document.getElementById("letter0").classList.add("focus");
+    wordCountElement.textContent += wordCount;
 
     quoteWritePlace.addEventListener("focus", () => {
         document
             .getElementById(`letter${quoteWritePlace.value.length}`)
             .classList.add("focus");
 
-            setInterval(() => {console.log(true); console.log();}, 1000)
     });
 
     quoteWritePlace.addEventListener("focusout", () => {
+        clearInterval(timer)
+        
         document
             .getElementById(`letter${quoteWritePlace.value.length}`)
             .classList.remove("focus");
     });
 
     quoteWritePlace.addEventListener("keypress", e => {
+        // ***************************************************************************** KH.darman inja :)
+        timer = setInterval(() => {
+            time++;
+            console.log(time);
+        }, 1000)
+        // ************************************************************************************************
+        
         const letterElement = document.getElementById(
             `letter${quoteWritePlace.value.length}`
         );
@@ -78,6 +98,10 @@ getQuote().then(() => {
         if (quoteWritePlace.value.length >= quote.length - 1) {
             quoteWritePlace.disabled = true;
 
+            correctLetterElement.textContent += correctLetterCounter;
+            falseLetterElement.textContent += falseLetterCounter;
+            timeElement.textContent = time + "s"
+            
             modal.style.display = "flex";
             overlay.style.display = "block";
             correctLetterCounter >= falseLetterCounter
@@ -102,7 +126,7 @@ getQuote().then(() => {
         }
     });
 
-    // disable 'Enter'& 'CTRL' key && make 'Tab' key to reload whole page
+    // disable 'Enter' and 'CTRL' key && make 'Tab' key to reload whole page
     quoteWritePlace.addEventListener("keydown", e => {
         if (e.key === "Tab") {
             e.preventDefault();
@@ -118,7 +142,7 @@ getQuote().then(() => {
         }
     });
 
-    // just for close the modal using button or click on overlay and reload whole page to take test again
+    // just for close the modal using button or click on overlay to close modal and reload whole page to take test again
     const closeModal = function () {
         modal.style.display = "none";
         overlay.style.display = "none";
