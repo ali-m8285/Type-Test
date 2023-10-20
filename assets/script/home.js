@@ -3,7 +3,7 @@ const api_key = "fMLExSSadUeokrb2mFrq0Q==QZcXR8OWU37Lvp7n";
 let quote, author, category;
 
 async function getQuote() {
-    document.querySelector("body").style.cursor = "wait";
+    document.body.style.cursor = "wait";
 
     // const response = await fetch(api_url, {
     //     method: "GET",
@@ -13,6 +13,7 @@ async function getQuote() {
     // });
 
     // const data = await response.json();
+
     // quote = data[0].quote;
     // author = data[0].author;
     // category = data[0].category;
@@ -22,7 +23,19 @@ async function getQuote() {
     category = "fucked up";
 }
 
-getQuote().then(() => {
+getQuote()
+    .then(program)
+    .catch(response => {
+        let status;
+
+        response.status ? (status = response.status) : (status = 403);
+
+        document.querySelector(
+            ".quoteContainer"
+        ).style.backgroundImage = `url('https://http.cat/${status}')`;
+    });
+
+function program() {
     const quoteContainer = document.querySelector(".quoteContainer");
     const quoteWritePlace = document.getElementById("writePlace");
     const authorElement = document.querySelector(".author");
@@ -33,9 +46,11 @@ getQuote().then(() => {
     const correctLetterElement = document.querySelector(".correctLetters");
     const falseLetterElement = document.querySelector(".falseLetters");
     const wordCountElement = document.querySelector(".wordCount");
-    const timeElement = document.querySelector(".time")
+    const timeElement = document.querySelector(".time");
+    const wpmElement = document.querySelector(".wpm");
     const wordCount = quote.split(" ").length;
-    let timer = false, time = 0 ;
+    let timer = false,
+        time = 0;
     let wpm;
     let correctLetterCounter = 0;
     let falseLetterCounter = 0;
@@ -44,7 +59,7 @@ getQuote().then(() => {
         quoteContainer.innerHTML += `<span id="letter${letter}">${quote[letter]}<span>`;
     }
 
-    document.querySelector("body").style.cursor = "default";
+    document.body.style.cursor = "default";
     quoteWritePlace.value = "";
     authorElement.textContent += author;
     categoryElement.textContent += category;
@@ -55,28 +70,25 @@ getQuote().then(() => {
         document
             .getElementById(`letter${quoteWritePlace.value.length}`)
             .classList.add("focus");
-
     });
 
     quoteWritePlace.addEventListener("focusout", () => {
-        clearInterval(timer)
+        clearInterval(timer);
         timer = false;
-        
+
         document
             .getElementById(`letter${quoteWritePlace.value.length}`)
             .classList.remove("focus");
     });
 
     quoteWritePlace.addEventListener("keypress", e => {
-        // ***************************************************************************** KH.darman inja :)
         if (!timer) {
             timer = setInterval(() => {
                 time++;
                 console.log(time);
-            }, 1000)
+            }, 1000);
         }
-        // ************************************************************************************************
-        
+
         const letterElement = document.getElementById(
             `letter${quoteWritePlace.value.length}`
         );
@@ -101,15 +113,20 @@ getQuote().then(() => {
         if (quoteWritePlace.value.length >= quote.length - 1) {
             quoteWritePlace.disabled = true;
 
+            // wpm = wordCount / time;
+
             correctLetterElement.textContent += correctLetterCounter;
             falseLetterElement.textContent += falseLetterCounter;
-            timeElement.textContent = time + "s"
-            
+            timeElement.textContent += time + "s";
+            // wpmElement.textContent += wpm;
+
             modal.style.display = "flex";
             overlay.style.display = "block";
             correctLetterCounter >= falseLetterCounter
                 ? (modal.style.backgroundColor = "rgb(64, 209, 64)")
                 : null;
+
+            clearInterval(timer);
         }
     });
 
@@ -162,4 +179,10 @@ getQuote().then(() => {
             closeModal();
         }
     });
-});
+}
+
+// ********************************************************************************* documentation
+// ***********************************************************************************************
+// https://www.cbse.gov.in/newsite/attach//Typing%20Test%20Formula%20and%20Illustration.pdf
+// wpm = count of words typed / duration (minute)
+// accuracy =

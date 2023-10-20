@@ -33,6 +33,7 @@ p {
     border: 2px solid black;
     font-size: 30px;
     padding: 2rem;
+    background: no-repeat center center / 100% 100%;
 }
 
 span {
