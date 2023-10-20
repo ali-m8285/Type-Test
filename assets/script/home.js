@@ -22,9 +22,9 @@ async function getQuote() {
     author = data[0].author;
     category = data[0].category;
 
-    // quote = "hello world";
-    // author = "ali majidi";
-    // category = "fucked up";
+    // quote = "hello world"; // }
+    // author = "ali majidi"; // }==> placeholder
+    // category = "fucked up"; // }
 }
 
 getQuote()
@@ -52,10 +52,13 @@ function program() {
     const wordCountElement = document.querySelector(".wordCount");
     const timeElement = document.querySelector(".time");
     const wpmElement = document.querySelector(".wpm");
+    const accuracyElement = document.querySelector(".accuracy");
     const wordCount = quote.split(" ").length;
+    const letterCount = quote.length;
     let timer = false,
         time = 0;
-    let wpm;
+    let wpm; // word per minute
+    let accuracy;
     let correctLetterCounter = 0;
     let falseLetterCounter = 0;
 
@@ -113,16 +116,23 @@ function program() {
                 .getElementById(`letter${quoteWritePlace.value.length + 1}`)
                 .classList.add("focus");
 
-        // disable the input to end test
+        // finish test
         if (quoteWritePlace.value.length >= quote.length - 1) {
             quoteWritePlace.disabled = true;
 
-            // wpm = wordCount / time;
+            let minute = time / 60;
+            minute < 1 ? (minute = 1) : (minute = Math.round(minute));
+            wpm = wordCount / minute;
+
+            accuracy =
+                ((correctLetterCounter - falseLetterCounter) * 100) /
+                letterCount;
 
             correctLetterElement.textContent += correctLetterCounter;
             falseLetterElement.textContent += falseLetterCounter;
             timeElement.textContent += time + "s";
-            // wpmElement.textContent += wpm;
+            wpmElement.textContent += wpm;
+            accuracyElement.textContent += Math.abs(Math.floor(accuracy)) + "%";
 
             modal.style.display = "flex";
             overlay.style.display = "block";
