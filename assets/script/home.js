@@ -48,6 +48,7 @@ function program() {
     const modal = document.querySelector(".endModal");
     const btnCloseModal = document.querySelector(".closeModal");
     const overlay = document.querySelector(".overlay");
+    const btnDarkMode = document.querySelector(".dark-mode-btn");
     const correctLetterElement = document.querySelector(".correctLetters");
     const falseLetterElement = document.querySelector(".falseLetters");
     const wordCountElement = document.querySelector(".wordCount");
@@ -207,6 +208,21 @@ function program() {
         }
     });
 
+    // DarkMode process
+    btnDarkMode.addEventListener("click", function () {
+        const body = document.body;
+        
+        body.classList.toggle("dark-mode");
+        if (body.classList.contains("dark-mode")){
+            this.textContent = "On"
+            this.classList.add("turn-on")
+        } else {
+            this.textContent = "Off"
+            this.classList.remove("turn-on")
+        }
+    })    
+    
+    // Modal process
     btnCloseModal.addEventListener("click", closeModal);
 
     overlay.addEventListener("click", closeModal);

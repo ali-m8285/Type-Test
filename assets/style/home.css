@@ -31,11 +31,12 @@ p {
 .quoteContainer {
     width: 800px;
     min-height: 400px;
-    box-shadow: -1px 5px 15px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: -1px 5px 18px rgba(0, 0, 0, 0.3);
     border-radius: 15px;
     font-size: 30px;
     padding: 2rem;
     background: no-repeat center center / 100% 100%;
+    background-color: #eee;
 }
 
 span {
@@ -81,7 +82,6 @@ span {
 }
 
 .focus {
-    background-color: yellow;
     animation: blink 0.5s infinite alternate ease;
 }
 
@@ -139,4 +139,30 @@ span {
 
 .hidden {
     opacity: 0;
+}
+
+/* Dark Mode */
+.dark-mode-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.dark-mode-btn.turn-on {
+    background-color: #eee;
+    color: black;
+}
+
+.dark-mode {
+    background-color: black;
+    color: #bbb;
+}
+
+.dark-mode .quoteContainer {
+    background-color: #333;
 }
