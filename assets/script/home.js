@@ -5,26 +5,26 @@ let quote, author, category;
 async function getQuote() {
     document.body.style.cursor = "wait";
 
-    const response = await fetch(api_url, {
-        method: "GET",
-        headers: {
-            "X-Api-Key": api_key,
-        },
-    });
+    // const response = await fetch(api_url, {
+    //     method: "GET",
+    //     headers: {
+    //         "X-Api-Key": api_key,
+    //     },
+    // });
 
-    if (response.status !== 200) {
-        throw response;
-    }
+    // if (response.status !== 200) {
+    //     throw response;
+    // }
 
-    const data = await response.json();
+    // const data = await response.json();
 
-    quote = data[0].quote;
-    author = data[0].author;
-    category = data[0].category;
+    // quote = data[0].quote;
+    // author = data[0].author;
+    // category = data[0].category;
 
-    // quote = "hello world"; // }
-    // author = "ali majidi"; // }==> placeholder
-    // category = "fucked up"; // }
+    quote = "hello world"; // }
+    author = "ali majidi"; // }==> placeholder
+    category = "fucked up"; // }
 }
 
 getQuote()
@@ -40,6 +40,7 @@ getQuote()
     });
 
 function program() {
+    // ----------------------------------------------------------------- input
     const quoteContainer = document.querySelector(".quoteContainer");
     const quoteWritePlace = document.getElementById("writePlace");
     const authorElement = document.querySelector(".author");
@@ -62,16 +63,43 @@ function program() {
     let correctLetterCounter = 0;
     let falseLetterCounter = 0;
 
-    for (let letter in quote) {
-        quoteContainer.innerHTML += `<span id="letter${letter}">${quote[letter]}<span>`;
-    }
+    // ----------------------------------------------------------------- function
 
-    document.body.style.cursor = "default";
-    quoteWritePlace.value = "";
-    authorElement.textContent += author;
-    categoryElement.textContent += category;
-    document.getElementById("letter0").classList.add("focus");
-    wordCountElement.textContent += wordCount;
+    // just for close the modal using button or click on overlay to close modal and reload whole page to take test again
+    const closeModal = () => {
+        modal.style.display = "none";
+        overlay.style.display = "none";
+        location.reload();
+    };
+
+    // make <p> tags hide or appear when user types
+    const paragraphs = {
+        paragraphsList: document.querySelectorAll("p"),
+        hide: () => {
+            for (let paragraph of this.paragraphsList) {
+                paragraph.classList.add("hidden");
+            }
+        },
+        appear: () => {
+            for (let paragraph of this.paragraphsList) {
+                paragraph.classList.remove("hidden");
+            }
+        },
+    };
+
+    // ----------------------------------------------------------------- process
+    window.addEventListener("load", () => {
+        for (let letter in quote) {
+            quoteContainer.innerHTML += `<span id="letter${letter}">${quote[letter]}<span>`;
+        }
+
+        document.body.style.cursor = "default";
+        quoteWritePlace.value = "";
+        authorElement.textContent += author;
+        categoryElement.textContent += category;
+        document.getElementById("letter0").classList.add("focus");
+        wordCountElement.textContent += wordCount;
+    });
 
     quoteWritePlace.addEventListener("focus", () => {
         document
@@ -83,6 +111,8 @@ function program() {
         clearInterval(timer);
         timer = false;
 
+        paragraphs.appear();
+
         document
             .getElementById(`letter${quoteWritePlace.value.length}`)
             .classList.remove("focus");
@@ -92,8 +122,9 @@ function program() {
         if (!timer) {
             timer = setInterval(() => {
                 time++;
-                console.log(time);
             }, 1000);
+
+            paragraphs.hide();
         }
 
         const letterElement = document.getElementById(
@@ -176,20 +207,16 @@ function program() {
         }
     });
 
-    // just for close the modal using button or click on overlay to close modal and reload whole page to take test again
-    const closeModal = function () {
-        modal.style.display = "none";
-        overlay.style.display = "none";
-        location.reload();
-    };
-
     btnCloseModal.addEventListener("click", closeModal);
 
     overlay.addEventListener("click", closeModal);
 
-    // to close modal using 'Esc' key press
+    // to close modal using 'Esc' OR 'Enter' key press
     document.addEventListener("keydown", e => {
-        if (e.key === "Escape" && modal.style.display === "flex") {
+        if (
+            (e.key === "Escape" || e.key === "Enter") &&
+            modal.style.display === "flex"
+        ) {
             closeModal();
         }
     });
@@ -198,5 +225,3 @@ function program() {
 // ********************************************************************************* documentation
 // ***********************************************************************************************
 // https://www.cbse.gov.in/newsite/attach//Typing%20Test%20Formula%20and%20Illustration.pdf
-// wpm = count of words typed / duration (minute)
-// accuracy =
