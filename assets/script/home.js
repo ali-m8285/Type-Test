@@ -5,26 +5,26 @@ let quote, author, category;
 async function getQuote() {
     document.body.style.cursor = "wait";
 
-    // const response = await fetch(api_url, {
-    //     method: "GET",
-    //     headers: {
-    //         "X-Api-Key": api_key,
-    //     },
-    // });
+    const response = await fetch(api_url, {
+        method: "GET",
+        headers: {
+            "X-Api-Key": api_key,
+        },
+    });
 
-    // if (response.status !== 200) {
-    //     throw response;
-    // }
+    if (response.status !== 200) {
+        throw response;
+    }
 
-    // const data = await response.json();
+    const data = await response.json();
 
-    // quote = data[0].quote;
-    // author = data[0].author;
-    // category = data[0].category;
+    quote = data[0].quote;
+    author = data[0].author;
+    category = data[0].category;
 
-    quote = "hello world"; // }
-    author = "ali majidi"; // }==> placeholder
-    category = "fucked up"; // }
+    // quote = "hello world"; // }
+    // author = "ali majidi"; // }==> placeholder
+    // category = "fucked up"; // }
 }
 
 getQuote()
@@ -76,12 +76,12 @@ function program() {
     // make <p> tags hide or appear when user types
     const paragraphs = {
         paragraphsList: document.querySelectorAll("p"),
-        hide: () => {
+        hide: function () {
             for (let paragraph of this.paragraphsList) {
                 paragraph.classList.add("hidden");
             }
         },
-        appear: () => {
+        appear: function () {
             for (let paragraph of this.paragraphsList) {
                 paragraph.classList.remove("hidden");
             }
@@ -89,18 +89,16 @@ function program() {
     };
 
     // ----------------------------------------------------------------- process
-    window.addEventListener("load", () => {
-        for (let letter in quote) {
-            quoteContainer.innerHTML += `<span id="letter${letter}">${quote[letter]}<span>`;
-        }
+    for (let letter in quote) {
+        quoteContainer.innerHTML += `<span id="letter${letter}">${quote[letter]}<span>`;
+    }
 
-        document.body.style.cursor = "default";
-        quoteWritePlace.value = "";
-        authorElement.textContent += author;
-        categoryElement.textContent += category;
-        document.getElementById("letter0").classList.add("focus");
-        wordCountElement.textContent += wordCount;
-    });
+    document.body.style.cursor = "default";
+    quoteWritePlace.value = "";
+    authorElement.textContent += author;
+    categoryElement.textContent += category;
+    document.getElementById("letter0").classList.add("focus");
+    wordCountElement.textContent += wordCount;
 
     quoteWritePlace.addEventListener("focus", () => {
         document
@@ -211,17 +209,15 @@ function program() {
     // DarkMode process
     btnDarkMode.addEventListener("click", function () {
         const body = document.body;
-        
+
         body.classList.toggle("dark-mode");
-        if (body.classList.contains("dark-mode")){
-            this.textContent = "On"
-            this.classList.add("turn-on")
+        if (body.classList.contains("dark-mode")) {
+            this.classList.add("turn-on");
         } else {
-            this.textContent = "Off"
-            this.classList.remove("turn-on")
+            this.classList.remove("turn-on");
         }
-    })    
-    
+    });
+
     // Modal process
     btnCloseModal.addEventListener("click", closeModal);
 
@@ -238,6 +234,6 @@ function program() {
     });
 }
 
-// ********************************************************************************* documentation
-// ***********************************************************************************************
+// ***************************************************************************documentation
+// ***************************************************************************************
 // https://www.cbse.gov.in/newsite/attach//Typing%20Test%20Formula%20and%20Illustration.pdf

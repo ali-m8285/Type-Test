@@ -18,20 +18,19 @@ body {
 p {
     font-size: 18px;
     margin: 12px;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .quote {
     width: fit-content;
     height: fit-content;
     position: relative;
-
 }
 
 .quoteContainer {
     width: 800px;
     min-height: 400px;
-    box-shadow: -1px 5px 18px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 5px 18px rgba(0, 0, 0, 0.3);
     border-radius: 15px;
     font-size: 30px;
     padding: 2rem;
@@ -55,7 +54,8 @@ span {
     color: transparent;
 }
 
-.author, .category {
+.author,
+.category {
     font-size: 30px;
     padding: 0;
     position: absolute;
@@ -125,7 +125,7 @@ span {
 
 .closeModal:active {
     transform: scale(0.9);
-    transition: .1s;
+    transition: 0.1s;
 }
 
 .overlay {
@@ -143,19 +143,28 @@ span {
 
 /* Dark Mode */
 .dark-mode-btn {
+    width: 100px;
+    height: 100px;
     position: absolute;
-    top: 10px;
+    top: -13px;
     left: 10px;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    font-size: 1rem;
     cursor: pointer;
+    transform: rotateZ(180deg);
+    background: url("./../icon/light-on.png") no-repeat center center / cover;
+    transition: 0.3s;
+}
+
+.dark-mode-btn:hover {
+    transform: rotatez(180deg) scale(1.2);
+}
+
+.dark-mode-btn:active {
+    transform: rotatez(180deg) scale(1);
+
 }
 
 .dark-mode-btn.turn-on {
-    background-color: #eee;
-    color: black;
+    background-image: url("./../icon/light-off.png");
 }
 
 .dark-mode {
@@ -165,4 +174,5 @@ span {
 
 .dark-mode .quoteContainer {
     background-color: #333;
+    box-shadow: none;
 }
