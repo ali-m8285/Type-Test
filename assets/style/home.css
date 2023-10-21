@@ -1,3 +1,23 @@
+@keyframes block-blink {
+    0% {
+        background-color: yellow;
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+@keyframes line-blink {
+    0% {
+        border-color: white;
+    }
+
+    100% {
+        border-color: transparent;
+    }
+}
+
 *,
 *::before,
 *::after {
@@ -71,18 +91,8 @@ span {
     text-transform: capitalize;
 }
 
-@keyframes blink {
-    0% {
-        background-color: yellow;
-    }
-
-    100% {
-        background-color: transparent;
-    }
-}
-
 .focus {
-    animation: blink 0.5s infinite alternate ease;
+    animation: block-blink 0.5s infinite alternate ease;
 }
 
 .correct {
@@ -160,7 +170,6 @@ span {
 
 .dark-mode-btn:active {
     transform: rotatez(180deg) scale(1);
-
 }
 
 .dark-mode-btn.turn-on {
@@ -175,4 +184,22 @@ span {
 .dark-mode .quoteContainer {
     background-color: #333;
     box-shadow: none;
+}
+
+.dark-mode .focus {
+    border-bottom: 5px solid transparent;
+    animation: line-blink 0.5s infinite alternate ease;
+}
+
+.dark-mode .correct, .dark-mode .false {
+    background-color: transparent;
+}
+
+.dark-mode .correct {
+    color:rgb(64, 209, 64);
+}
+
+.dark-mode .false {
+    color: red;
+    border-bottom: 3px solid red;
 }
