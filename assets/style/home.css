@@ -18,6 +18,7 @@ body {
 p {
     font-size: 18px;
     margin: 12px;
+    transition: .3s;
 }
 
 .quote {
@@ -30,7 +31,8 @@ p {
 .quoteContainer {
     width: 800px;
     min-height: 400px;
-    border: 2px solid black;
+    box-shadow: -1px 5px 15px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
     font-size: 30px;
     padding: 2rem;
     background: no-repeat center center / 100% 100%;
@@ -133,4 +135,8 @@ span {
     background-color: rgba(0, 0, 0, 0.5);
     cursor: pointer;
     display: none;
+}
+
+.hidden {
+    opacity: 0;
 }
