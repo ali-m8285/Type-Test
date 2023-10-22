@@ -1,10 +1,14 @@
+:root {
+    --correct-green: rgb(64, 209, 64);
+}
+
 @keyframes block-blink {
     0% {
-        background-color: yellow;
+        border: 2px solid black;
     }
 
     100% {
-        background-color: transparent;
+        border: 2px solid transparent;
     }
 }
 
@@ -54,12 +58,14 @@ p {
 .quoteContainer {
     width: 800px;
     min-height: 400px;
-    box-shadow: 5px 10px 18px rgba(0, 0, 0, 0.5);
+    box-shadow: 15px 20px 18px rgba(0, 0, 0, 0.5),
+                inset -5px -10px 18px rgba(0, 0, 0, 0.3),
+                inset 10px 7px 20px rgba(255,255,255, .8);
     border-radius: 15px;
     font-size: 30px;
     padding: 2rem;
     background: no-repeat center center / 100% 100%;
-    background-color: #eee;
+    background-color: #ddd;
 }
 
 span {
@@ -83,7 +89,7 @@ span {
     font-size: 30px;
     padding: 0;
     position: absolute;
-    top: calc(100% + 20px);
+    top: calc(100% + 50px);
 }
 
 .author {
@@ -100,7 +106,7 @@ span {
 }
 
 .correct {
-    background-color: rgb(64, 209, 64);
+    background-color: var(--correct-green);
 }
 
 .false {
@@ -109,7 +115,7 @@ span {
 
 .endModal {
     width: 500px;
-    height: 500px;
+    height: 600px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -121,6 +127,7 @@ span {
     box-shadow: 0 0 20px 3px white;
     text-shadow: 0 0 20px black;
     font-size: 30px;
+    border-radius: 2rem;
     color: white;
     background-color: red;
     z-index: 99;
@@ -138,7 +145,7 @@ span {
 }
 
 .closeModal:active {
-    transform: scale(0.9);
+    transform: scale(1);
     transition: 0.1s;
 }
 
@@ -200,10 +207,18 @@ span {
 }
 
 .dark-mode .correct {
-    color:rgb(64, 209, 64);
+    color: var(--correct-green);
 }
 
 .dark-mode .false {
     color: red;
     border-bottom: 3px solid red;
+}
+
+.dark-mode .endModal {
+    box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.7);
+}
+
+.dark-mode .overlay {
+    background-color: rgba(200, 200, 200, 0.2);
 }

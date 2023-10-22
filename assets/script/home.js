@@ -38,7 +38,7 @@ getQuote()
         quoteContainer.style.backgroundImage = `url('https://http.cat/${status}')`;
 
         if (document.body.classList.contains("dark-mode")) {
-            quoteContainer.style.boxShadow = "0px 0px 15px 0px white";
+            quoteContainer.style.boxShadow = "inset 0px 0px 15px 0px white";
         }
     });
 
