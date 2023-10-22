@@ -26,6 +26,10 @@
     box-sizing: border-box;
 }
 
+::selection {
+    background-color: transparent;
+}
+
 body {
     min-height: 100vh;
     display: flex;
@@ -50,7 +54,7 @@ p {
 .quoteContainer {
     width: 800px;
     min-height: 400px;
-    box-shadow: 2px 5px 18px rgba(0, 0, 0, 0.3);
+    box-shadow: 5px 10px 18px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     font-size: 30px;
     padding: 2rem;

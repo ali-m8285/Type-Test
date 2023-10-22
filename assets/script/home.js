@@ -5,38 +5,41 @@ let quote, author, category;
 async function getQuote() {
     document.body.style.cursor = "wait";
 
-    const response = await fetch(api_url, {
-        method: "GET",
-        headers: {
-            "X-Api-Key": api_key,
-        },
-    });
+    // const response = await fetch(api_url, {
+    //     method: "GET",
+    //     headers: {
+    //         "X-Api-Key": api_key,
+    //     },
+    // });
 
-    if (response.status !== 200) {
-        throw response;
-    }
+    // if (response.status !== 200) {
+    //     throw response;
+    // }
 
-    const data = await response.json();
+    // const data = await response.json();
 
-    quote = data[0].quote;
-    author = data[0].author;
-    category = data[0].category;
+    // quote = data[0].quote;
+    // author = data[0].author;
+    // category = data[0].category;
 
-    // quote = "hello world"; // }
-    // author = "ali majidi"; // }==> placeholder
-    // category = "fucked up"; // }
+    quote = "hello world"; // }
+    author = "ali majidi"; // }==> placeholder
+    category = "fucked up"; // }
 }
 
 getQuote()
     .then(program)
     .catch(response => {
+        const quoteContainer = document.querySelector(".quoteContainer");
         let status;
 
         response.status ? (status = response.status) : (status = 403);
 
-        document.querySelector(
-            ".quoteContainer"
-        ).style.backgroundImage = `url('https://http.cat/${status}')`;
+        quoteContainer.style.backgroundImage = `url('https://http.cat/${status}')`;
+
+        if (document.body.classList.contains("dark-mode")) {
+            quoteContainer.style.boxShadow = "0px 0px 15px 0px white";
+        }
     });
 
 function program() {
