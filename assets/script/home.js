@@ -5,26 +5,26 @@ let quote, author, category;
 async function getQuote() {
     document.body.style.cursor = "wait";
 
-    // const response = await fetch(api_url, {
-    //     method: "GET",
-    //     headers: {
-    //         "X-Api-Key": api_key,
-    //     },
-    // });
+    const response = await fetch(api_url, {
+        method: "GET",
+        headers: {
+            "X-Api-Key": api_key,
+        },
+    });
 
-    // if (response.status !== 200) {
-    //     throw response;
-    // }
+    if (response.status !== 200) {
+        throw response;
+    }
 
-    // const data = await response.json();
+    const data = await response.json();
 
-    // quote = data[0].quote;
-    // author = data[0].author;
-    // category = data[0].category;
+    quote = data[0].quote;
+    author = data[0].author;
+    category = data[0].category;
 
-    quote = "hello world"; // }
-    author = "ali majidi"; // }==> placeholder
-    category = "fucked up"; // }
+    // quote = "hello world"; // }
+    // author = "ali majidi"; // }==> placeholder
+    // category = "fucked up"; // }
 }
 
 getQuote()

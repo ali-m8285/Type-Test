@@ -1,5 +1,6 @@
 # Type-Test
-Just a simple typing speed test. 
+Just a simple typing speed test. <br>
+After taking test you can get your typing speed in details, such as "WPM, Accuracy, ..."
 <br><br>
 
 ## Ease of Use
