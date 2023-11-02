@@ -44,17 +44,17 @@ getQuote()
 
 function program() {
     // ----------------------------------------------------------------- input
-    const quoteContainer = document.querySelector(".quoteContainer");
+    const quoteContainer = document.querySelector(".quote-container");
     const quoteWritePlace = document.getElementById("writePlace");
     const authorElement = document.querySelector(".author");
     const categoryElement = document.querySelector(".category");
-    const modal = document.querySelector(".endModal");
-    const btnCloseModal = document.querySelector(".closeModal");
+    const modal = document.querySelector(".end-modal");
+    const btnCloseModal = document.querySelector(".close-modal");
     const overlay = document.querySelector(".overlay");
     const btnDarkMode = document.querySelector(".dark-mode-btn");
-    const correctLetterElement = document.querySelector(".correctLetters");
-    const falseLetterElement = document.querySelector(".falseLetters");
-    const wordCountElement = document.querySelector(".wordCount");
+    const correctLetterElement = document.querySelector(".correct-letters");
+    const falseLetterElement = document.querySelector(".false-letters");
+    const wordCountElement = document.querySelector(".word-count");
     const timeElement = document.querySelector(".time");
     const wpmElement = document.querySelector(".wpm");
     const accuracyElement = document.querySelector(".accuracy");
@@ -167,7 +167,7 @@ function program() {
             wpmElement.textContent += wpm;
             accuracyElement.textContent += Math.abs(Math.floor(accuracy)) + "%";
 
-            modal.style.display = "flex";
+            modal.style.display = "grid";
             overlay.style.display = "block";
             correctLetterCounter >= falseLetterCounter
                 ? (modal.style.backgroundColor = "rgb(64, 209, 64)")
